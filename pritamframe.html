@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">           <!--eta hche left side r frame tar jonne jekhane gaan bajche-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> 
+    <link rel="stylesheet" href="pritamframe.css">
+    <title>pritam frame</title>
+</head>
+<body>
+<header>
+    <nav>
+        <h3>Music</h3>
+    </nav>
+</header>
+
+<div class="play-song">
+
+    <li class="song-item">
+        <span>01</span>
+
+        <img src="ab67616d0000b27352fe6875028c892308ffc2f7.jpeg" alt="">
+
+        <h5>TUM SE HI
+            <div class="subtitle">PRITAM</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="1"></i>
+    </li>
+
+    <li class="song-item">
+        <span>02</span>
+        
+        <img src="ab67616d0000b273c08202c50371e234d20caf62.jpeg" alt="">
+
+        <h5>KESARIYA
+            <div class="subtitle">Arijit Singh</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="2"></i>
+    </li>
+
+<li class="song-item">
+        <span>03</span>
+        
+        <img src="ab67616d0000b273da6f73a25f4c79d0e6b4a8bd.jpeg" alt="">
+
+        <h5>BIRDS
+            <div class="subtitle">Imagine Dragons</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="3"></i>
+    </li>
+
+    <li class="song-item">
+        <span>04</span> 
+        
+        <img src="ab67616d0000b273586249b944cbb97aa644aa6c.jpeg" alt="">
+
+        <h5>Ram Lala
+            <div class="subtitle">Vishal Mishra</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="4"></i>
+    </li>
+
+    <li class="song-item">
+        <span>05</span>
+        
+        <img src="ab67616d0000b273349457e48d9a62e30e158c7b.jpg" alt="">
+
+        <h5>Andaaz e Karam
+            <div class="subtitle">Madhur Sharma</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="5"></i>
+    </li>
+
+    <li class="song-item">
+        <span>06</span>
+        
+        <img src="ab67616d0000b2738347f41fed7179133011a25d.jpg" alt="">
+
+        <h5>Bhogoban 2.0
+            <div class="subtitle">Arijit Singh</div>
+        </h5>
+    <i class="fa-solid fa-play playListPlay" id="6"></i>
+    </li>
+</div>
+
+<div class="content">
+    <h1>Pritam chakraborty</h1>
+    <p>Pritam chakraborty</p>
+
+    <footer>
+        <div class="music-bar">
+            <span id="current-start">0:00</span>
+
+            <div class="bar">
+            <input type="range" id="seek" min="0" max="100">  <!--tanar jonne je akta figure 0 to 100 spotify web page e thakbe-->
+            <div class="bar2" id="bar2"></div>
+            <div class="dot"></div>
+            </div>
+         <span id="current-end">0:30</span>
+        </div>
+
+        <div class="icon">
+            <i class="fa-solid fa-music" data-mode="next"></i>
+            <i class="fa-solid fa-backward" id="back"></i>
+            <i class="fa-solid fa-play" id="masterPlay"></i>
+            <i class="fa-solid fa-forward" id="next"></i>
+      </div>
+
+      <div class="vol">
+     <i class="fa-solid fa-volume-high"></i>
+     <input type="range" min="0" max="100" id="vol"> <!--volume bar bnanaor jonne volume range from low to high-->
+     <div class="dot" id="vol-dot"></div>
+     <div class="vol-bar"></div>
+    </div>
+    </footer>
+
+</div>
+<script src="scriptspotify.js"></script>
+</body>
+</html>

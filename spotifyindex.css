@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: black;
+    color: white;    /*font r colour*/
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 13vh;
+}
+
+.logo{
+    margin-left: 30px;
+}
+
+.logo i{
+    font-size: 35px; /*spotify logo tar size baraonr jonne*/
+}
+
+.logo a{
+    color: #1db954; /*spotify logo take green colour hche tai a tag niye koreche*/
+}
+
+.search h1{
+    color: #1db954;
+    font-size: 5vh;
+    
+}
+
+.log-in-sign-up{
+    margin-right: 8px;
+    margin-bottom: 5px;
+    
+}
+
+.log-in-sign-up button.signup{
+    height: 10vh;
+    width: 9vh;
+    border: none;
+    font-size: 17px;
+    margin-right: 20px;
+    background-color: black;
+    
+
+}
+
+.log-in-sign-up button.signup a{
+    color: #fff; /*sign up r text white korar jonne*/
+    text-decoration: none;
+}
+
+
+.log-in-sign-up button.signup:hover, button.signup:hover{
+    transform: translate(0,-2px);
+    color: rgba(255, 255, 255, 0.241);
+}
+
+.log-in-sign-up button.login{
+    height: 10vh;
+    width: 16vh;
+    border-radius: 28px;
+    border: none;
+    font-size: 17px;
+}
+
+.log-in-sign-up button.login a{
+    color: rgb(18, 18, 18);
+    text-decoration: transparent;
+    padding: 14px;
+    height: 23px;
+    
+}
+
+.log-in-sign-up button.login:hover,button.login a{
+    background-color: rgba(255,255,255,0.822);
+   transform: translate(0,-2px);
+}
+
+iframe{
+    border: none;
+    border-radius: 9px;
+}

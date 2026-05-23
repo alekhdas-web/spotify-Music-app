@@ -1,80 +1,168 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const masterPlay = document.getElementById("masterPlay");
-    const shuffle = document.querySelector(".shuffle");
-    const seek = document.querySelector("#seek");
-    const bar2 = document.querySelector(".bar2");
-    const dot = document.querySelector(".dot");
-    const currentStart = document.querySelector("#current-start");
-    const currentEnd = document.querySelector("#current-end");
-    const vol_icon = document.querySelector("#vol-icon");
-    const vol_bar = document.querySelector(".vol-bar");
-    const vol_dot = document.querySelector(".vol-dot");
-    const back = document.querySelector("#back");
-    const next = document.querySelector("#next");
 
-    const music = new Audio("audiospotify/1.mp3");
+    const songContainer =
+        document.getElementById("songContainer");
 
-    let index = 1;
-    const playlistPlayButtons = Array.from(document.getElementsByClassName("playListPlay")); // convert to array
+    const searchBtn =
+        document.getElementById("searchBtn");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+
+   
+    // SEARCH SONGS
+
+    async function searchSongs(query) {
+
+        songContainer.innerHTML =
+            "<h2>Loading...</h2>";
+
+        try {
+
+            const response = await fetch(
+                `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "X-RapidAPI-Key":
+                            "a666b57759msh05fb77d6f3e6815p165096jsn41270454d859",
+
+                        "X-RapidAPI-Host":
+                            "deezerdevs-deezer.p.rapidapi.com"
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            displaySongs(data.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+            songContainer.innerHTML =
+                "<h2>Error loading songs</h2>";
+        }
+    }
+
+
+
     
+    // DISPLAY SONGS
 
-    // Play/Pause Functionality with check for masterPlay
-    if (masterPlay) {
-        masterPlay.addEventListener("click", () => {
-            if (music.paused || music.currentTime <= 0) {
-                music.play();
-                masterPlay.classList.add("fa-pause");
-                masterPlay.classList.remove("fa-play");
-            } else {
-                music.pause();
-                masterPlay.classList.remove("fa-pause");
-                masterPlay.classList.add("fa-play");
+    function displaySongs(songs) {
+
+        async function addFavorite(song){
+
+    try{
+
+        await fetch(
+            "http://localhost:5000/favorites", //favorites.json e backend file store hbe jeta favourite//
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(song)
             }
-        });
+        );
+
+        alert("Song added to favorites");
+
+    }catch(error){
+
+        console.log(error);
     }
-// Playlist buttons functionality
-    if (playlistPlayButtons.length > 0) {
-        playlistPlayButtons.forEach((button) => {
-            button.addEventListener('click', (event) => {
-                const playListPlayId = event.currentTarget.id;
-                index = parseInt(playListPlayId); // use index as a global variable
+} //backend function added run server 5000 first//
 
-                // If the clicked button is already playing, pause the music
-                if (!music.paused && music.src.includes(`audiospotify/${index}.mp3`)) {
-                    music.pause();
-                    button.classList.remove('fa-pause');
-                    button.classList.add('fa-play');
 
-                    if (masterPlay) {
-                        masterPlay.classList.remove('fa-pause');
-                        masterPlay.classList.add('fa-play');
-                    }
-                } else {
-                    // Set and play the selected song
-                    music.src = `audiospotify/${index}.mp3`;
-                    music.play();
+        songContainer.innerHTML = "";
 
-                    // Reset all playlist buttons to play state
-                    playlistPlayButtons.forEach((btn) => {
-                        btn.classList.remove('fa-pause');
-                        btn.classList.add('fa-play');
-                    });
+        songs.forEach((song) => {
 
-                    // Update the clicked button to pause state
-                    button.classList.add('fa-pause');
-                    button.classList.remove('fa-play');
+            songContainer.innerHTML += `
 
-                    if(masterPlay){
-                        masterPlay.classList.add('fa-pause');
-                        masterPlay.classList.remove('fa-play');
-                    }
-              }
-            });
-        });
+            <div class="song-item">
+
+                <img src="${song.album.cover_medium}">
+
+                <div class="song-info">
+
+                    <h3>${song.title}</h3>
+
+                    <p>${song.artist.name}</p>
+
+                </div>
+
+                <button class="fav-btn">
+   ❤️ Favorite
+</button>
+
+                <audio controls>
+
+
+                    <source 
+                        src="${song.preview}" 
+                        type="audio/mp3"
+                    >
+
+                </audio>
+
+            </div>
+            `;
+        }); 
+
+        const favButtons =
+    document.querySelectorAll(".fav-btn");
+
+favButtons.forEach((button,index)=>{
+
+    button.addEventListener("click",()=>{
+
+        addFavorite(songs[index]);
+    });
+});
     }
+
+
+
+    
+    // BUTTON SEARCH
     
 
+    searchBtn.addEventListener("click", () => {
+
+        const query = searchInput.value;
+
+        searchSongs(query);
+    });
+
+
+
+    
+    // ENTER SEARCH
+    
+
+    searchInput.addEventListener("keypress", (e) => {
+
+        if (e.key === "Enter") {
+
+            searchSongs(searchInput.value);
+        }
+    });
+
+
+
+    
+    // DEFAULT SONGS
+    
+
+    searchSongs("Arijit");
 });
-
-
-

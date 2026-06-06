@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const response = await fetch(
-                `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
+               `https://cors-anywhere.herokuapp.com/https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
                 {
                     method: "GET",
 

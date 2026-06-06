@@ -1,0 +1,26 @@
+# 🎵 Spotify Clone
+
+A full-stack music streaming web app
+built with the MERN Stack.
+
+
+## 🛠️ Tech Stack
+- **Frontend:** React.js, CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** JWT
+
+## ✨ Features
+- 🎵 Music playback controls
+- 📋 Playlist management
+- 👤 User authentication
+- 🔍 Search functionality
+- 📱 Responsive design
+
+
+
+## 👨‍💻 Developer
+**Alekhya Das**
+- LinkedIn: linkedin.com/in/alekhyadas
+- GitHub: github.com/alekhyadas
+- Email: dasalex969@gmail.com

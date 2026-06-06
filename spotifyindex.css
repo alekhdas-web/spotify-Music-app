@@ -89,3 +89,50 @@ iframe{
     border: none;
     border-radius: 9px;
 }
+/* updated code for new iframe*/
+
+.frame-container{
+
+    display:flex;
+    gap:10px;
+}
+
+.left-frame{
+
+    width:25%;
+    height:700px;
+    border:none;
+}
+
+.right-frame{
+
+    width:75%;
+    height:700px;
+    border:none;
+}
+
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media(max-width:768px){
+
+    .frame-container{
+
+        flex-direction:column;
+    }
+
+    .left-frame{
+
+        width:100%;
+        height:500px;
+    }
+
+    .right-frame{
+
+        width:100%;
+        height:700px;
+    }
+}

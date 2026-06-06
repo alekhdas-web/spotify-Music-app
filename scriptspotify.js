@@ -1,70 +1,168 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const songContainer = 
+
+    const songContainer =
         document.getElementById("songContainer");
-    const searchBtn = 
+
+    const searchBtn =
         document.getElementById("searchBtn");
-    const searchInput = 
+
+    const searchInput =
         document.getElementById("searchInput");
 
-    // SEARCH SONGS — Direct Deezer API
+
+
+   
+    // SEARCH SONGS
+
     async function searchSongs(query) {
-        songContainer.innerHTML = 
-            "<h2>Loading... 🎵</h2>";
+
+        songContainer.innerHTML =
+            "<h2>Loading...</h2>";
+
         try {
+
             const response = await fetch(
-                `https://api.deezer.com/search?q=${query}&limit=10`
+                `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "X-RapidAPI-Key":
+                            "a666b57759msh05fb77d6f3e6815p165096jsn41270454d859",
+
+                        "X-RapidAPI-Host":
+                            "deezerdevs-deezer.p.rapidapi.com"
+                    }
+                }
             );
+
             const data = await response.json();
-            
-            if(data.data && data.data.length > 0) {
-                displaySongs(data.data);
-            } else {
-                songContainer.innerHTML = 
-                    "<h2>No songs found!</h2>";
-            }
+
+            displaySongs(data.data);
+
         } catch (error) {
+
             console.log(error);
-            songContainer.innerHTML = 
-                "<h2>Error loading songs!</h2>";
+
+            songContainer.innerHTML =
+                "<h2>Error loading songs</h2>";
         }
     }
 
+
+
+    
     // DISPLAY SONGS
+
     function displaySongs(songs) {
+
+        async function addFavorite(song){
+
+    try{
+
+        await fetch(
+            "http://localhost:5000/favorites", //favorites.json e backend file store hbe jeta favourite//
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(song)
+            }
+        );
+
+        alert("Song added to favorites");
+
+    }catch(error){
+
+        console.log(error);
+    }
+} //backend function added run server 5000 first//
+
+
         songContainer.innerHTML = "";
+
         songs.forEach((song) => {
+
             songContainer.innerHTML += `
+
             <div class="song-item">
-                <img src="${song.album.cover_medium}" 
-                     alt="${song.title}">
+
+                <img src="${song.album.cover_medium}">
+
                 <div class="song-info">
+
                     <h3>${song.title}</h3>
+
                     <p>${song.artist.name}</p>
+
                 </div>
+
+                <button class="fav-btn">
+   ❤️ Favorite
+</button>
+
                 <audio controls>
+
+
                     <source 
                         src="${song.preview}" 
-                        type="audio/mp3">
+                        type="audio/mp3"
+                    >
+
                 </audio>
-            </div>`;
-        });
+
+            </div>
+            `;
+        }); 
+
+        const favButtons =
+    document.querySelectorAll(".fav-btn");
+
+favButtons.forEach((button,index)=>{
+
+    button.addEventListener("click",()=>{
+
+        addFavorite(songs[index]);
+    });
+});
     }
 
-    // SEARCH BUTTON
+
+
+    
+    // BUTTON SEARCH
+    
+
     searchBtn.addEventListener("click", () => {
-        const query = searchInput.value.trim();
-        if(query) searchSongs(query);
+
+        const query = searchInput.value;
+
+        searchSongs(query);
     });
 
-    // ENTER KEY
+
+
+    
+    // ENTER SEARCH
+    
+
     searchInput.addEventListener("keypress", (e) => {
+
         if (e.key === "Enter") {
-            const query = 
-                searchInput.value.trim();
-            if(query) searchSongs(query);
+
+            searchSongs(searchInput.value);
         }
     });
 
-    // DEFAULT SEARCH
-    searchSongs("Arijit Singh");
+
+
+    
+    // DEFAULT SONGS
+    
+
+    searchSongs("Arijit");
 });
